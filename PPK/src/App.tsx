@@ -1,9 +1,10 @@
-import ComanyForm from "./components/CompanyAdmin"
-// 
+// import ComanyForm from "./components/CompanyAdmin"
+import NavBar from "./components/Navbar"
+
 const App = () => {
   return (
     <div>
-      <ComanyForm/>
+      <NavBar/>
     </div>
   )
 }
