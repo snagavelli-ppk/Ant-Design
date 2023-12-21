@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import ComanyForm from './CompanyAdmin';
+import React, { useState } from "react";
+import ComanyForm from "./CompanyAdmin";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -7,87 +7,120 @@ import {
   SlackOutlined,
   HomeOutlined,
   AppstoreOutlined,
-  ProjectFilled 
-} from '@ant-design/icons';
-import { Layout, Menu, Button, theme } from 'antd';
+  ProjectFilled,
+} from "@ant-design/icons";
+import { Layout, Menu, Button } from "antd";
 
 const { Header, Sider, Content } = Layout;
 
 const App: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
-  const {
-    token: { colorBgContainer, borderRadiusLG },
-  } = theme.useToken();
+  const [showCompanyForm, setShowCompanyForm] = useState(false);
+
+  const handleMenuClick = (key: string) => {
+    if (key === "add") {
+      setShowCompanyForm(true);
+    } else {
+      setShowCompanyForm(false);
+    }
+  };
 
   return (
-    <Layout style={{width: '100vw',height: '100vh'}}>
-      <Sider trigger={null} collapsible collapsed={collapsed}
-      style={{width: 200, minHeight: 280}}
-      > 
+    <Layout style={{ width: "100vw", height: "100vh" }}>
+      <Sider
+        trigger={null}
+        collapsible
+        collapsed={collapsed}
+        style={{
+          borderRadius: 5,
+          background: "linear-gradient(to bottom right, black, #444, #888)",
+        }}
+      >
         <Button
-            type="text"
-            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-            onClick={() => setCollapsed(!collapsed)}
-            style={{
-              backgroundColor: 'grey',
-              fontSize: '16px',
-              width: 64,
-              height: 64,
-              color: 'white'
-            }}
-          />
-       
-        <div className="demo-logo-vertical" />
+          icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+          onClick={() => setCollapsed(!collapsed)}
+          style={{
+            fontSize: "16px",
+            width: 78,
+            height: 64,
+            background: "inherit",
+            color: "whitesmoke",
+          }}
+        />
+
         <Menu
-          theme="dark"
           mode="inline"
-          defaultSelectedKeys={['1']}
+          defaultSelectedKeys={["1"]}
           items={[
             {
-              key: '1',
+              key: "1",
               icon: <HomeOutlined />,
-              label: 'DashBoard',
+              label: "DashBoard",
             },
             {
-              key: '2',
+              key: "2",
               icon: <SlackOutlined />,
-              label: 'Companies',
+              label: "Companies",
             },
             {
-              key: '3',
+              key: "3",
               icon: <UserOutlined />,
-              label: 'Company Admins',
+              label: "Company Admins",
             },
             {
-              key: '4',
+              key: "4",
               icon: <AppstoreOutlined />,
-              label: 'Tutorials',
+              label: "Tutorials",
             },
             {
-              key: '5',
+              key: "5",
               icon: <ProjectFilled />,
-              label: 'Simulations',
-            }
+              label: "Simulations",
+            },
           ]}
+          style={{
+            background: "linear-gradient(to bottom right, black, #444, #888)",
+            color: "whitesmoke",
+          }}
         />
       </Sider>
       <Layout>
-        <Header style={{ padding: 0, background: colorBgContainer, backgroundColor:'greenyellow',textAlign: 'center'}}>
-          <h2>App</h2>
+        <Header
+          style={{
+            background: "linear-gradient(to bottom right, black, #444, #888)",
+            textAlign: "end",
+            borderRadius: 5,
+            color: "whitesmoke",
+            margin: "0 15px 0 18px",
+          }}
+        >
+          <h2>
+            SuperAdmin <UserOutlined />
+          </h2>
         </Header>
         <Content
           style={{
-            margin: '24px 16px',
+            // display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            margin: "24px 16px",
             padding: 24,
             minHeight: 280,
-            background: colorBgContainer,
-            borderRadius: borderRadiusLG,
-            backgroundColor: 'goldenrod'
+            borderRadius: 5,
+            background: "linear-gradient(to bottom right, black, #444, #888)",
           }}
         >
-          <div style={{width: '50vw', border: '2px solid gold', borderRadius: '5px',marginLeft: '200px'}}>
-          <ComanyForm></ComanyForm> 
-          </div>
+          <Menu
+            mode="horizontal"
+            theme="light"
+            onClick={({ key }) => handleMenuClick(key as string)}
+            style={{ marginBottom: 16 }}
+          >
+            <Menu.Item key="add">Add</Menu.Item>
+            <Menu.Item key="edit">Edit</Menu.Item>
+            <Menu.Item key="delete">Delete</Menu.Item>
+          </Menu>
+          {showCompanyForm && <ComanyForm />}
         </Content>
       </Layout>
     </Layout>

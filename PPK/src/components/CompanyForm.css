@@ -4,4 +4,10 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-  } 
+  }
+  
+  Form {
+    background-color: rgb(208, 175, 255);
+    color: aliceblue;
+  }
+  

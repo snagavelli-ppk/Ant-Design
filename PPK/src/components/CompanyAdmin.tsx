@@ -22,7 +22,7 @@ const SubmitButton = ({ form }: { form: FormInstance }) => {
   }, [values]);
 
   return (
-    <Button type="primary" htmlType="submit" disabled={!submittable}>
+    <Button type="primary" htmlType="submit" disabled={!submittable} style={{backgroundColor: "black",color:'whitesmoke'}}>
       Submit
     </Button>
   );
@@ -50,15 +50,16 @@ const ComanyForm: React.FC = () => {
   };
 
   return (
-    <div>
+    <div style={{ width: '50%'}}>
       <Form
         form={form}
         name="validateOnly"
         layout="vertical"
         autoComplete="off"
         onFinish={onFinish}
+        style={{borderRadius: '5px'}}
       >
-        <h1>Company Form</h1>
+        <h2>Company Form</h2>
         <Row gutter={16}>
           <Col span={12}>
             <Form.Item
