@@ -15,7 +15,7 @@ import {
   ProjectFilled,
 } from "@ant-design/icons";
 import { Layout, Menu, Button } from "antd";
-import NavigationBar from "./contentComponents/ContentNav";
+// import NavigationBar from "./contentComponents/ContentNav";
 
 const { Header, Sider } = Layout;
 
