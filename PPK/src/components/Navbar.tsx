@@ -1,5 +1,10 @@
-import React, { useState } from "react";
-import ComanyForm from "./CompanyAdmin";
+import React from "react";
+import { Routes, Route, Link } from "react-router-dom";
+import Companies from "./contentComponents/Companies";
+import CompanyAdmins from "./contentComponents/CompanyAdmin";
+import Dashboard from "./contentComponents/Dashboard";
+import Simulations from "./contentComponents/Simulations";
+import Tutorials from "./contentComponents/Tutorial";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -10,121 +15,91 @@ import {
   ProjectFilled,
 } from "@ant-design/icons";
 import { Layout, Menu, Button } from "antd";
+import NavigationBar from "./contentComponents/ContentNav";
 
-const { Header, Sider, Content } = Layout;
+const { Header, Sider } = Layout;
 
-const App: React.FC = () => {
-  const [collapsed, setCollapsed] = useState(false);
-  const [showCompanyForm, setShowCompanyForm] = useState(false);
+const siderMenuStyle: React.CSSProperties = {
+  borderRadius: 5,
+  background: "lightskyblue",
+  color: "whitesmoke",
+};
 
-  const handleMenuClick = (key: string) => {
-    if (key === "add") {
-      setShowCompanyForm(true);
-    } else {
-      setShowCompanyForm(false);
-    }
-  };
+const NavBar: React.FC = () => {
+  const [collapsed, setCollapsed] = React.useState(false);
 
   return (
-    <Layout style={{ width: "100vw", height: "100vh" }}>
-      <Sider
-        trigger={null}
-        collapsible
-        collapsed={collapsed}
+
+      <Layout
         style={{
-          borderRadius: 5,
-          background: "linear-gradient(to bottom right, black, #444, #888)",
+          width: "100vw",
+          height: "100vh"
         }}
       >
-        <Button
-          icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-          onClick={() => setCollapsed(!collapsed)}
-          style={{
-            fontSize: "16px",
-            width: 78,
-            height: 64,
-            background: "inherit",
-            color: "whitesmoke",
-          }}
-        />
+        <Sider
+          trigger={null}
+          collapsible
+          collapsed={collapsed}
+          style={siderMenuStyle}
+        >
+          <Button
+            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+            onClick={() => setCollapsed(!collapsed)}
+            style={{
+              fontSize: "16px",
+              width: 78,
+              height: 64,
+              background: "inherit",
+              color: "black",
+            }}
+          />
 
-        <Menu
-          mode="inline"
-          defaultSelectedKeys={["1"]}
-          items={[
-            {
-              key: "1",
-              icon: <HomeOutlined />,
-              label: "DashBoard",
-            },
-            {
-              key: "2",
-              icon: <SlackOutlined />,
-              label: "Companies",
-            },
-            {
-              key: "3",
-              icon: <UserOutlined />,
-              label: "Company Admins",
-            },
-            {
-              key: "4",
-              icon: <AppstoreOutlined />,
-              label: "Tutorials",
-            },
-            {
-              key: "5",
-              icon: <ProjectFilled />,
-              label: "Simulations",
-            },
-          ]}
-          style={{
-            background: "linear-gradient(to bottom right, black, #444, #888)",
-            color: "whitesmoke",
-          }}
-        />
-      </Sider>
-      <Layout>
-        <Header
-          style={{
-            background: "linear-gradient(to bottom right, black, #444, #888)",
-            textAlign: "end",
-            borderRadius: 5,
-            color: "whitesmoke",
-            margin: "0 15px 0 18px",
-          }}
-        >
-          <h2>
-            SuperAdmin <UserOutlined />
-          </h2>
-        </Header>
-        <Content
-          style={{
-            // display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            margin: "24px 16px",
-            padding: 24,
-            minHeight: 280,
-            borderRadius: 5,
-            background: "linear-gradient(to bottom right, black, #444, #888)",
-          }}
-        >
           <Menu
-            mode="horizontal"
-            theme="light"
-            onClick={({ key }) => handleMenuClick(key as string)}
-            style={{ marginBottom: 16 }}
+            mode="inline"
+            inlineCollapsed={collapsed}
+            style={{backgroundColor: 'inherit'}}
           >
-            <Menu.Item key="add">Add</Menu.Item>
-            <Menu.Item key="edit">Edit</Menu.Item>
-            <Menu.Item key="delete">Delete</Menu.Item>
+            <Menu.Item key="/" icon={<HomeOutlined />}>
+              <Link to="/">Dashboard</Link>
+            </Menu.Item>
+            <Menu.Item key="/companies" icon={<SlackOutlined />}>
+              <Link to="/companies">Companies</Link>
+            </Menu.Item>
+            <Menu.Item key="/company-admins" icon={<UserOutlined />}>
+              <Link to="/company-admins">Company Admins</Link>
+            </Menu.Item>
+            <Menu.Item key="/tutorials" icon={<AppstoreOutlined />}>
+              <Link to="/tutorials">Tutorials</Link>
+            </Menu.Item>
+            <Menu.Item key="/simulations" icon={<ProjectFilled />}>
+              <Link to="/simulations">Simulations</Link>
+            </Menu.Item>
           </Menu>
-          {showCompanyForm && <ComanyForm />}
-        </Content>
+        </Sider>
+        <Layout>
+          <Header
+            style={{
+              background:'lightsteelblue',
+              textAlign: "end",
+              borderRadius: 5,
+              color: "whitesmoke",
+              margin: "0 15px 0 18px",
+            }}
+          >
+            <h2>
+              SuperAdmin <UserOutlined />
+            </h2>
+          </Header>
+          <Routes>
+            <Route path="/" element={<Dashboard />}/>
+            <Route path="/companies" element={<Companies />} />
+            <Route path="/company-admins" element={<CompanyAdmins />} />
+            <Route path="/tutorials" element={<Tutorials />} />
+            <Route path="/simulations" element={<Simulations />} />
+          </Routes>
+        </Layout>
       </Layout>
-    </Layout>
   );
 };
 
-export default App;
+export default NavBar;
