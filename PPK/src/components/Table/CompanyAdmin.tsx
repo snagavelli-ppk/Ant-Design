@@ -83,7 +83,7 @@ const AntTable: React.FC = () => {
         total={pagination.total}
         onChange={handlePaginationChange}
         showSizeChanger
-        pageSizeOptions={["5", "10", "20"]}
+        pageSizeOptions={["5"]}
         // showTotal={(total, range) => ${range[0]}-${range[1]} of ${total} items}
         
       />
