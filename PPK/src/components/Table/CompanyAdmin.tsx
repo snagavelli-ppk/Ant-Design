@@ -68,7 +68,10 @@ const AntTable: React.FC = () => {
   return (
     <div
       style={{
+        marginTop: 50,
         textAlign: "center",
+        width: '100%', // Set initial width
+        overflowX: 'auto', // Enable horizontal scrolling on small screens
       }}
     >
       <Table
@@ -76,16 +79,16 @@ const AntTable: React.FC = () => {
         columns={columns}
         loading={loading}
         pagination={false}
+        scroll={{ y: 275 }} 
       />
+
       <Pagination
         current={pagination.current}
         pageSize={pagination.pageSize}
         total={pagination.total}
         onChange={handlePaginationChange}
         showSizeChanger
-        pageSizeOptions={["5"]}
-        // showTotal={(total, range) => ${range[0]}-${range[1]} of ${total} items}
-        
+        pageSizeOptions={["5", "10", "20"]}
       />
     </div>
   );
