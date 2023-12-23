@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Table, Pagination } from "antd";
 import { generateRandomData, total } from "./functions";
 import { UserData } from "./Types";
-import "../Form/CompanyForm.css";
 
 const AntTable: React.FC = () => {
   const [data, setData] = useState<UserData[]>([]);
