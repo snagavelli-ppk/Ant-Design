@@ -50,7 +50,7 @@ const ComanyForm: React.FC = () => {
   };
 
   return (
-    <div style={{ width: '50%'}}>
+    <div>
       <Form
         form={form}
         name="validateOnly"

@@ -20,6 +20,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "../CompanyAdmin/src/components/Form"],
+  "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
